@@ -28,6 +28,8 @@ function App() {
     ))
     
     setCards(shuffledCards);
+    setChoiceOne(null);
+    setChoiceTwo(null);
     setTurns(0);
     
   }
@@ -36,6 +38,10 @@ function App() {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card);        
 
   }
+
+  useEffect(() =>{
+    shuffleCards();
+  },[]);
 
   useEffect(() => {    
     compareChoices(choiceOne, choiceTwo);      
@@ -83,7 +89,8 @@ function App() {
             card={card} 
             key={card.id} 
             handleChoice={handleChoice}
-            flipped={card === choiceOne || card === choiceTwo || card.matched}/>
+            flipped={card === choiceOne || card === choiceTwo || card.matched}
+            disabled={choiceOne && choiceTwo  }/>
           )          
         )}
       </div>
